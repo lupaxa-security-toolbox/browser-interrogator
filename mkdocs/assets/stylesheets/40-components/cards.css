@@ -1,0 +1,109 @@
+/* =============================================================================
+ * Shared Cards
+ * ============================================================================= */
+
+.md-typeset .grid.cards {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--lupaxa-spacing-md);
+  margin-top: 1.5rem;
+}
+
+.md-typeset .grid.cards > ul {
+  display: contents;
+}
+
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > li {
+  position: relative;
+  margin: 0;
+  padding: 0.9rem 1.4rem;
+  overflow: hidden;
+  cursor: default;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--md-default-bg-color) 96%,
+        var(--lupaxa-blue)
+      ),
+      var(--md-default-bg-color)
+    );
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: var(--lupaxa-radius-card);
+  box-shadow: var(--lupaxa-shadow-card);
+  transition:
+    background var(--lupaxa-transition-medium),
+    border-color var(--lupaxa-transition-medium),
+    box-shadow var(--lupaxa-transition-medium);
+}
+
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > li:hover {
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--md-default-bg-color) 90%,
+        var(--lupaxa-light-blue)
+      ),
+      var(--md-default-bg-color)
+    );
+  border-color: var(--lupaxa-card-hover-border);
+  box-shadow: var(--lupaxa-shadow-card-hover);
+}
+
+.md-typeset .grid.cards strong {
+  font-size: 1.05rem;
+}
+
+.md-typeset .grid.cards hr {
+  margin: 0.8rem 0;
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .grid.cards .lg {
+  margin-right: 0.35rem;
+  color: var(--lupaxa-blue);
+}
+
+.md-typeset .grid.cards a {
+  cursor: pointer;
+}
+
+.md-typeset .grid.cards > ul > li > p:first-child .twemoji,
+.md-typeset .grid.cards > ul > li > p:first-child .lg,
+.md-typeset .grid.cards > ul > li > p:first-child svg,
+.md-typeset .grid.cards > li > p:first-child .twemoji,
+.md-typeset .grid.cards > li > p:first-child .lg,
+.md-typeset .grid.cards > li > p:first-child svg {
+  color: var(--lupaxa-light-blue);
+}
+
+.md-typeset .grid.cards > ul > li > p:first-child svg,
+.md-typeset .grid.cards > li > p:first-child svg {
+  fill: currentcolor;
+}
+
+.md-typeset .grid.cards > ul > li > p,
+.md-typeset .grid.cards > li > p {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  -webkit-hyphens: auto;
+}
+
+.md-typeset .grid.cards > ul > li > p:first-child,
+.md-typeset .grid.cards > li > p:first-child {
+  text-align: left;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > li {
+  box-shadow:
+    0 0.1rem 0.4rem rgb(0 0 0 / 15%),
+    0 0.4rem 1.2rem rgb(0 0 0 / 12%);
+}

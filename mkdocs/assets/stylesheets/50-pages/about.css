@@ -1,0 +1,109 @@
+/* =============================================================================
+ * Home about sections (ported from thelupaxaproject.org)
+ * ============================================================================= */
+
+.about-introduction {
+  margin: 1.5rem 0 var(--lupaxa-spacing-lg);
+  padding: 1.5rem 1.75rem;
+  cursor: default;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--md-default-bg-color) 96%,
+        var(--lupaxa-blue)
+      ),
+      var(--md-default-bg-color)
+    );
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: var(--lupaxa-radius-card);
+  box-shadow: var(--lupaxa-shadow-card);
+  transition:
+    background var(--lupaxa-transition-medium),
+    border-color var(--lupaxa-transition-medium),
+    box-shadow var(--lupaxa-transition-medium);
+}
+
+.about-introduction:hover {
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--md-default-bg-color) 90%,
+        var(--lupaxa-light-blue)
+      ),
+      var(--md-default-bg-color)
+    );
+  border-color:
+    color-mix(
+      in srgb,
+      var(--lupaxa-light-blue) 45%,
+      var(--md-default-fg-color--lightest)
+    );
+  box-shadow: var(--lupaxa-shadow-card-hover);
+}
+
+.about-introduction p {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.about-introduction-lead p {
+  font-size: 20px;
+}
+
+.about-introduction p + p {
+  margin-top: 0.9rem;
+}
+
+.about-introduction strong {
+  color: var(--lupaxa-blue);
+  font-weight: 650;
+}
+
+[data-md-color-scheme="slate"] .about-introduction strong {
+  color: var(--lupaxa-light-blue);
+}
+
+.md-typeset .grid.cards.about-summary,
+.md-typeset .grid.cards.about-principles,
+.md-typeset .grid.cards.about-build {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.md-typeset .about-summary > ul > li,
+.md-typeset .about-summary > li,
+.md-typeset .about-principles > ul > li,
+.md-typeset .about-principles > li,
+.md-typeset .about-build > ul > li,
+.md-typeset .about-build > li {
+  padding: var(--lupaxa-spacing-md) 1.4rem;
+}
+
+.md-typeset .about-summary > ul > li > p:first-child,
+.md-typeset .about-summary > li > p:first-child,
+.md-typeset .about-principles > ul > li > p:first-child,
+.md-typeset .about-principles > li > p:first-child,
+.md-typeset .about-build > ul > li > p:first-child,
+.md-typeset .about-build > li > p:first-child {
+  margin: 0;
+}
+
+.md-typeset .about-summary hr,
+.md-typeset .about-principles hr,
+.md-typeset .about-build hr {
+  margin: 0.65rem 0;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 var(--lupaxa-spacing-lg);
+}

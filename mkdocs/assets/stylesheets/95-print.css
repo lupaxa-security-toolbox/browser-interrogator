@@ -1,0 +1,158 @@
+/* =============================================================================
+ * The Lupaxa Project Portal
+ * Print
+ * ============================================================================= */
+
+.print-page-notice {
+  display: none;
+}
+
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .lupaxa-hero-actions,
+  .about-actions {
+    display: none !important;
+  }
+
+  .md-content__inner {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lupaxa-hero,
+  .lupaxa-error-hero {
+    margin: 0 0 var(--lupaxa-spacing-lg);
+    padding: var(--lupaxa-spacing-lg) 0 var(--lupaxa-spacing-md);
+    background: none;
+    border-bottom: 1px solid #999999;
+  }
+
+  .lupaxa-hero-logo,
+  .lupaxa-hero > img {
+    width: min(100%, 160px);
+    margin-bottom: 0.6rem;
+  }
+
+  .filter-panel {
+    display: none !important;
+  }
+
+  /* Keep the on-screen columns. display:block stacked every card
+     full width, which is the mobile layout and wastes the page. */
+  .md-typeset .grid.cards,
+  .md-typeset .grid.cards.catalogue-grid,
+  .md-typeset .grid.cards.catalogue-grid--latest,
+  .md-typeset .grid.cards.catalogue-grid.catalogue-grid--languages,
+  .md-typeset .grid.cards.sponsor-reasons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .md-typeset .grid.cards > ul > li,
+  .md-typeset .grid.cards > li {
+    padding: 0.45rem 0.55rem;
+  }
+
+  .md-typeset .catalogue-grid img.catalogue-logo {
+    max-width: min(100%, 72px);
+  }
+
+  /* Screen titles are left-aligned. Centre them on paper like language cards. */
+  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child,
+  .md-typeset .grid.cards.catalogue-grid > li > p:first-child,
+  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child strong,
+  .md-typeset .grid.cards.catalogue-grid > li > p:first-child strong,
+  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child a,
+  .md-typeset .grid.cards.catalogue-grid > li > p:first-child a {
+    text-align: center;
+  }
+
+  .md-typeset .catalogue-grid > ul > li > p:has(> .catalogue-category),
+  .md-typeset .catalogue-grid > li > p:has(> .catalogue-category) {
+    flex-wrap: nowrap;
+    gap: 0.15rem;
+  }
+
+  .md-typeset .catalogue-category {
+    padding: 0.04rem 0.18rem;
+    font-size: 0.48rem;
+    line-height: 1.2;
+  }
+
+  .md-typeset .lupaxa-article-card {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .md-typeset .grid.cards > ul > li,
+  .md-typeset .grid.cards > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards > li,
+  .about-introduction,
+  .about-name {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .md-typeset a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+
+  .md-typeset a[href^="#"]::after,
+  .md-typeset a[href^="javascript:"]::after,
+  .md-typeset .grid.cards a[href]::after {
+    content: none;
+  }
+
+  .no-print-page {
+    display: none !important;
+  }
+
+  .md-typeset .print-page-notice {
+    display: block;
+    max-width: 32rem;
+    margin: 4rem auto 0;
+    padding: 0.9rem 1.1rem 1rem;
+    color: #1a1a1a;
+    text-align: left;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 0.35rem;
+  }
+
+  .md-typeset .print-page-notice__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .md-typeset .print-page-notice__title svg {
+    width: 1.45rem;
+    height: 1.45rem;
+    flex: none;
+  }
+
+  .md-typeset .print-page-notice p:not(.print-page-notice__title) {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .md-typeset .print-page-notice p.print-page-notice__online {
+    margin-top: 0.85rem;
+  }
+}

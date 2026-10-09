@@ -1,0 +1,134 @@
+<!--
+  Custom single-row header for Lupaxa-style documentation sites.
+
+  Retains Material's native logo and drawer while rendering the top-level
+  navigation directly in the header. Theme is locked to slate (no toggle).
+-->
+
+{% macro first_nav_url(item) -%}
+  {%- if item.url -%}
+    {{ item.url | url }}
+  {%- elif item.children -%}
+    {%- set ns = namespace(found="") -%}
+    {%- for child in item.children if not ns.found -%}
+      {%- set ns.found = first_nav_url(child) -%}
+    {%- endfor -%}
+    {{ ns.found }}
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro descendant_nav_urls(item) -%}
+  {%- if item.url %}{{ item.url | url }} {% endif -%}
+  {%- if item.children -%}
+    {%- for child in item.children -%}
+      {{ descendant_nav_urls(child) }}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endmacro %}
+
+{% set class = "md-header md-header--shadow" %}
+
+<header class="{{ class }}" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid lupaxa-header__inner"
+    aria-label="{{ lang.t('header') }}"
+  >
+    <!-- Link to home -->
+    <a
+      href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
+      class="md-header__button md-logo lupaxa-header__logo"
+      aria-label="{{ config.site_name }}"
+      data-md-component="logo"
+    >
+      {% include "partials/logo.html" %}
+    </a>
+
+    <!-- Drawer toggle: hidden on desktop/tablet, shown on phone -->
+    <label
+      class="md-header__button md-icon lupaxa-header__drawer-button"
+      for="__drawer"
+      aria-label="{{ lang.t('drawer.title') }}"
+    >
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+
+    <!-- Top-level desktop navigation -->
+    <nav class="lupaxa-header__nav" aria-label="Primary navigation">
+      <ul class="lupaxa-header__nav-list">
+        {% for nav_item in nav %}
+          {# Sections have url=None; walk to the first descendant page. #}
+          {% set nav_href = first_nav_url(nav_item) %}
+          {% set active_ns = namespace(on=nav_item.active) %}
+          {% set prefix_attr = descendant_nav_urls(nav_item) | trim %}
+          <li
+            class="lupaxa-header__nav-item{% if active_ns.on %} lupaxa-header__nav-item--active{% endif %}"
+          >
+            <a
+              class="lupaxa-header__nav-link"
+              href="{% if nav_href %}{{ nav_href }}{% else %}{{ '' | url }}{% endif %}"
+              data-nav-prefixes="{{ prefix_attr }}"
+              {% if active_ns.on %}aria-current="page"{% endif %}
+            >
+              <span class="lupaxa-header__nav-label">{{ nav_item.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="lupaxa-header__tools">
+      {% if config.extra.language_picker %}
+      <div class="lupaxa-lang-picker" translate="no">
+        <select
+          class="lupaxa-lang-picker__select"
+          id="lupaxa-lang"
+          aria-label="Language"
+        >
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+          <option value="pt">Português</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pl">Polski</option>
+          <option value="bg">Български</option>
+          <option value="cs">Čeština</option>
+          <option value="da">Dansk</option>
+          <option value="el">Ελληνικά</option>
+          <option value="fi">Suomi</option>
+          <option value="hr">Hrvatski</option>
+          <option value="hu">Magyar</option>
+          <option value="lt">Lietuvių</option>
+          <option value="no">Norsk</option>
+          <option value="ro">Română</option>
+          <option value="sv">Svenska</option>
+          <option value="tr">Türkçe</option>
+          <option value="uk">Українська</option>
+        </select>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
+  {% if config.extra.language_picker %}
+  <div
+    class="lupaxa-lang-fallback notranslate"
+    id="lupaxa-lang-fallback"
+    hidden
+    role="status"
+    translate="no"
+  >
+    <p class="lupaxa-lang-fallback__text">
+      This page is in English. Your browser can translate it.
+    </p>
+    <button
+      type="button"
+      class="lupaxa-lang-fallback__dismiss"
+      id="lupaxa-lang-fallback-dismiss"
+    >
+      Dismiss
+    </button>
+  </div>
+  {% endif %}
+</header>

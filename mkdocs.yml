@@ -1,0 +1,170 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+# =============================================================================
+# Site Information
+# =============================================================================
+
+site_name: Browser Interrogator
+
+site_description: Browser Interrogator documentation.
+
+site_author: The Lupaxa Project
+
+site_url: https://browserinterrogator.com/
+
+extra:
+  generator: false
+  # Desktop/tablet: no left column (header lists Home | Interrogate Me | How it Works | Sponsor).
+  # Phone: primary sidebar stays in the DOM as Material's drawer.
+  # Default when omitted: false (left nav visible on desktop).
+  hide_primary_sidebar: true
+  hide_secondary_sidebar: true
+  # Viewer language picker (client-side translation; English URLs).
+  # Default when omitted: false (picker hidden).
+  language_picker: true
+  # Footer (rendered by overrides/partials/copyright.html).
+  footer_name: The Lupaxa Project
+  footer_taglines:
+    - Where exploration meets precision.
+    - Where the untamed meets the engineered.
+  # Counter.dev analytics (omit counter_dev_id to disable).
+  # Create a site at https://counter.dev and set a per-project id below.
+  counter_dev_id: ef410665-76d4-43fe-9e91-53f26ed1004b
+  counter_dev_utcoffset: 0
+  social_image: assets/images/social-media-card.png
+  social_image_width: 1200
+  social_image_height: 630
+  social_logo: assets/images/logo.png
+  social_locale: en_GB
+  theme_color: "#203959"
+  twitter_card: summary_large_image
+
+# =============================================================================
+# Content
+# =============================================================================
+
+docs_dir: mkdocs
+site_dir: site
+use_directory_urls: true
+
+validation:
+  links:
+    absolute_links: warn
+
+# =============================================================================
+# Theme
+# =============================================================================
+
+theme:
+  name: material
+  custom_dir: overrides
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  language: en
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.png
+
+  features:
+    - content.code.copy
+    - content.tooltips
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.top
+    - navigation.sections
+    - toc.follow
+
+  palette:
+    scheme: slate
+    primary: blue
+    accent: light blue
+
+  icon:
+    repo: fontawesome/brands/github
+
+# =============================================================================
+# Plugins
+# =============================================================================
+
+# Empty list disables Material search (omitting plugins: would re-enable it).
+plugins: []
+
+hooks:
+  - hooks/asset_cache_bust.py
+
+watch:
+  - hooks
+  - overrides
+
+# =============================================================================
+# Navigation
+# =============================================================================
+
+nav:
+  - Home: index.md
+  - Interrogate Me: interrogate-me.md
+  - How it Works: how-it-works.md
+  - Sponsor: sponsor.md
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: false
+      permalink_title: Link to this section
+  - pymdownx.blocks.caption
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# =============================================================================
+# Additional Assets
+# =============================================================================
+
+extra_css:
+  - assets/stylesheets/00-tokens.css
+  - assets/stylesheets/10-base.css
+  - assets/stylesheets/20-layout.css
+  - assets/stylesheets/30-navigation.css
+  - assets/stylesheets/40-components/buttons.css
+  - assets/stylesheets/40-components/cards.css
+  - assets/stylesheets/40-components/footer.css
+  - assets/stylesheets/40-components/hero.css
+  - assets/stylesheets/40-components/tables.css
+  - assets/stylesheets/50-pages/about.css
+  - assets/stylesheets/50-pages/sponsor.css
+  - assets/stylesheets/90-responsive.css
+  - assets/stylesheets/95-print.css
+  - assets/stylesheets/99-overrides.css
+
+extra_javascript:
+  - assets/javascript/page-lifecycle.js
+  - assets/javascript/language-preference.js
+  - assets/javascript/header-active-nav.js
+  - assets/javascript/show-me.js
+
+# =============================================================================
+# Copyright (rendered by overrides/partials/copyright.html)
+# =============================================================================

@@ -1,0 +1,33 @@
+/* =============================================================================
+ * The Lupaxa Project Portal
+ * Global Layout
+ * ============================================================================= */
+
+.md-main__inner {
+  margin-top: 0;
+}
+
+.md-content {
+  min-width: 0;
+}
+
+.md-content__inner {
+  max-width: var(--lupaxa-content-width);
+  margin: 0 auto;
+  padding-top: 0;
+  padding-right: var(--lupaxa-gutter-right);
+  padding-bottom: var(--lupaxa-spacing-xl);
+  padding-left: var(--lupaxa-gutter-left);
+}
+
+/* Sidebar stays in the DOM for the phone drawer. Material then sets a
+   fixed left margin, which pins the column left of the centred header. */
+[dir="ltr"] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner,
+[dir="ltr"] .md-sidebar--secondary:not([hidden]) ~ .md-content > .md-content__inner {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.md-content__inner::before {
+  display: none;
+}

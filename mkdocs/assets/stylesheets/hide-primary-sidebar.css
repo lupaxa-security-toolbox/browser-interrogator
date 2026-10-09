@@ -1,0 +1,17 @@
+/* =============================================================================
+ * Desktop/tablet: hide body sidebars. Header carries page links.
+ * Phone: keep the primary sidebar as Material's navigation drawer.
+ *
+ * Enabled when mkdocs.yml has extra.hide_primary_sidebar and/or
+ * extra.hide_secondary_sidebar.
+ * ============================================================================= */
+
+.md-sidebar--secondary {
+  display: none;
+}
+
+@media not screen and (max-width: 44.984375em) {
+  .md-sidebar--primary {
+    display: none;
+  }
+}

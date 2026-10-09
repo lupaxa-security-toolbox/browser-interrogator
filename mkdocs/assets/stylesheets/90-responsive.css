@@ -1,0 +1,234 @@
+/* =============================================================================
+ * The Lupaxa Project Portal
+ * Responsive Behaviour
+ * ============================================================================= */
+
+@media screen and (max-width: 76.234375em) {
+  :root {
+    --lupaxa-header-height: 4rem;
+    --lupaxa-gutter-left: calc(
+      max(var(--lupaxa-spacing-md), env(safe-area-inset-left, 0px)) + 0.2rem
+    );
+    --lupaxa-gutter-right: calc(
+      max(var(--lupaxa-spacing-md), env(safe-area-inset-right, 0px)) + 0.2rem
+    );
+  }
+
+  .md-header {
+    color: var(--lupaxa-white);
+    background-color: var(--lupaxa-blue);
+  }
+
+  .lupaxa-header__inner {
+    min-height: var(--lupaxa-header-height);
+  }
+
+  .md-header__button.md-logo.lupaxa-header__logo {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-right: var(--lupaxa-spacing-sm);
+    margin-left: 0;
+  }
+
+  .md-header__button.md-logo.lupaxa-header__logo img,
+  .md-header__button.md-logo.lupaxa-header__logo svg {
+    width: 3.25rem;
+    height: 3.25rem;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .lupaxa-lang-picker {
+    display: flex;
+    margin-right: 0;
+  }
+
+  .md-sidebar--primary {
+    z-index: 30;
+  }
+
+  .md-overlay {
+    z-index: 20;
+  }
+
+  .md-nav--primary .md-nav__title,
+  .md-nav--primary .md-nav__title[for="__drawer"] {
+    color: var(--lupaxa-white);
+    background-color: var(--lupaxa-blue);
+  }
+
+  [data-md-color-scheme="slate"]
+    .md-sidebar--primary
+    .md-nav--primary
+    .md-nav__link {
+    color: var(--lupaxa-white) !important;
+  }
+
+  [data-md-color-scheme="slate"]
+    .md-sidebar--primary
+    .md-nav--primary
+    .md-nav__link:hover,
+  [data-md-color-scheme="slate"]
+    .md-sidebar--primary
+    .md-nav--primary
+    .md-nav__link:focus {
+    color: var(--lupaxa-light-blue) !important;
+  }
+
+  [data-md-color-scheme="slate"]
+    .md-sidebar--primary
+    .md-nav--primary
+    .md-nav__link--active {
+    color: var(--lupaxa-light-blue) !important;
+    font-weight: 700;
+  }
+
+  .md-sidebar--primary
+    .md-nav--primary
+    label.md-nav__link[for="__toc"] {
+    display: none !important;
+  }
+
+  .md-sidebar--primary
+    .md-nav--primary
+    label.md-nav__link[for="__toc"]
+    + a.md-nav__link {
+    display: flex !important;
+  }
+
+  .md-nav--primary .md-nav__link {
+    color: var(--lupaxa-white);
+  }
+
+  .md-nav--primary .md-nav__link:hover,
+  .md-nav--primary .md-nav__link:focus {
+    color: var(--lupaxa-light-blue);
+  }
+
+  .md-nav--primary .md-nav__link--active {
+    color: var(--lupaxa-light-blue);
+    font-weight: 700;
+  }
+
+  .lupaxa-hero,
+  .lupaxa-error-hero {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .md-typeset .grid.cards.about-principles,
+  .md-typeset .grid.cards.about-build {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 59.984375em) {
+  .lupaxa-hero-actions:not(.lupaxa-hero-actions--pair) {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: none;
+  }
+}
+
+/* Four links plus the language picker no longer fit. The drawer takes over
+   before the labels run into the picker. */
+@media screen and (max-width: 54em) {
+  .lupaxa-header__drawer-button {
+    display: inline-flex;
+    order: -1;
+    margin-right: var(--lupaxa-spacing-xs);
+    margin-left: 0;
+  }
+
+  .lupaxa-header__nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 44.984375em) {
+  :root {
+    --lupaxa-gutter-left: calc(
+      (
+        max(var(--lupaxa-spacing-md), env(safe-area-inset-left, 0px)) + 0.2rem
+      ) / 2
+    );
+    --lupaxa-gutter-right: calc(
+      (
+        max(var(--lupaxa-spacing-md), env(safe-area-inset-right, 0px)) + 0.2rem
+      ) / 2
+    );
+  }
+
+  .lupaxa-hero,
+  .lupaxa-error-hero {
+    margin-bottom: var(--lupaxa-spacing-lg);
+    padding: 2.5rem 1rem 2.25rem;
+  }
+
+  .lupaxa-hero-actions:not(.lupaxa-hero-actions--pair) {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: none;
+  }
+
+  .about-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lupaxa-hero-actions .md-button,
+  .about-actions .md-button {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .md-typeset .grid.cards,
+  .md-typeset .grid.cards.about-summary,
+  .md-typeset .grid.cards.about-principles,
+  .md-typeset .grid.cards.about-build,
+  .md-typeset .grid.cards.sponsor-reasons {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .md-typeset h2 {
+    margin-top: 2.25rem;
+  }
+
+  .about-introduction {
+    padding: 1.2rem;
+  }
+
+  .about-name {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-name-mark {
+    padding-bottom: var(--lupaxa-spacing-md);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  }
+}
+
+/* Two short hero buttons stay side by side until a portrait phone. */
+@media screen and (max-width: 30em) {
+  .lupaxa-hero-actions--pair {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: none;
+  }
+}
+
+/* Portrait phone only (~720px). Tablets and landscape keep the full GitHub chip. */
+@media screen and (max-width: 44.984375em) and (orientation: portrait) {
+  .lupaxa-header__tools .md-source__repository {
+    display: none;
+  }
+
+  .lupaxa-header__tools .md-source {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lupaxa-lang-picker {
+    margin-left: 0;
+  }
+}
