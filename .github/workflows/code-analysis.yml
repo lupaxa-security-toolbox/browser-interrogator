@@ -12,7 +12,7 @@ on:
       - "poetry.lock"
       - "Pipfile"
       - "Pipfile.lock"
-      - "src/**"
+      - "hooks/**"
   pull_request:
     branches:
       - "master"
@@ -26,7 +26,7 @@ on:
       - "poetry.lock"
       - "Pipfile"
       - "Pipfile.lock"
-      - "src/**"
+      - "hooks/**"
   schedule:
     - cron: "4 3 * * 1"
   workflow_dispatch:

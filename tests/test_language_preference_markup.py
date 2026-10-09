@@ -12,7 +12,7 @@ HIDE_SIDEBAR = (ROOT / "mkdocs/assets/stylesheets/hide-primary-sidebar.css").rea
 OVERRIDES_CSS = (ROOT / "mkdocs/assets/stylesheets/99-overrides.css").read_text(encoding="utf-8")
 
 
-def test_header_has_custom_picker_not_alternate():
+def test_header_has_custom_picker_not_alternate() -> None:
     assert 'id="lupaxa-lang"' in HEADER
     assert "partials/alternate.html" not in HEADER
     assert "extra.alternate" not in HEADER
@@ -49,7 +49,7 @@ def test_header_has_custom_picker_not_alternate():
     assert 'class="lupaxa-lang-fallback notranslate"' in HEADER
 
 
-def test_language_script_follows_page_lifecycle():
+def test_language_script_follows_page_lifecycle() -> None:
     scripts = [
         line.strip()
         for line in MKDOCS.splitlines()
@@ -68,14 +68,14 @@ def test_language_script_follows_page_lifecycle():
     assert "{% if config.extra.language_picker %}" in HEADER
 
 
-def test_header_css_keeps_picker_out_of_nav_flex():
+def test_header_css_keeps_picker_out_of_nav_flex() -> None:
     assert ".lupaxa-lang-picker" in NAV_CSS
     assert ".lupaxa-lang-fallback" in NAV_CSS
     assert "max-width: 90rem" not in NAV_CSS
     assert "flex: 0 0 auto" in NAV_CSS
 
 
-def test_footer_opts_out_of_translate():
+def test_footer_opts_out_of_translate() -> None:
     assert 'class="md-copyright notranslate" translate="no"' in FOOTER
     assert "partials/source.html" not in HEADER
     assert "repo_url:" not in MKDOCS
@@ -84,7 +84,7 @@ def test_footer_opts_out_of_translate():
     assert "lupaxa-header__nav-link::after" not in NAV_CSS
 
 
-def test_header_nav_stays_visible_on_tablet():
+def test_header_nav_stays_visible_on_tablet() -> None:
     tablet = RESPONSIVE_CSS.split("@media screen and (max-width: 76.234375em)")[1].split("@media")[
         0
     ]

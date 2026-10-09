@@ -1,36 +1,9 @@
-[build-system]
-requires = ["setuptools>=69", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "browser-interrogator"
-version = "0.1.0"
-description = "Browser Interrogator documentation site."
-readme = "README.md"
-requires-python = ">=3.13"
-authors = [{ name = "The Lupaxa Project" }]
-dependencies = [
-  "mkdocs==1.6.1",
-  "mkdocs-material==9.7.7",
-]
-
-[project.optional-dependencies]
-dev = [
-  "pytest>=8.3",
-  "ruff>=0.11",
-  "mypy>=1.14",
-]
-test = [
-  "pytest>=8.3",
-]
-
-[tool.setuptools.packages.find]
-where = ["src"]
+# Tooling for the website hooks and tests. This repository is not a Python package.
 
 [tool.ruff]
 line-length = 100
 target-version = "py313"
-src = ["src", "hooks", "tests"]
+src = ["hooks", "tests"]
 exclude = ["site", ".makefiles", ".venv"]
 
 [tool.ruff.lint]
@@ -41,7 +14,7 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 
 [tool.mypy]
 python_version = "3.13"
-files = ["src", "hooks", "tests"]
+files = ["hooks", "tests"]
 strict = true
 warn_unused_configs = true
 

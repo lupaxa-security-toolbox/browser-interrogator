@@ -9,14 +9,14 @@ def test_extra_asset_paths_strips_queries_and_dict_javascript() -> None:
             "extra_css": ["assets/stylesheets/00-tokens.css?v=old"],
             "extra_javascript": [
                 "assets/javascript/page-lifecycle.js",
-                {"path": "assets/javascript/snippet-modal.js", "type": "module"},
+                {"path": "assets/javascript/show-me.js", "type": "module"},
             ],
         }
     )
     assert paths == [
         "assets/stylesheets/00-tokens.css",
         "assets/javascript/page-lifecycle.js",
-        "assets/javascript/snippet-modal.js",
+        "assets/javascript/show-me.js",
     ]
 
 

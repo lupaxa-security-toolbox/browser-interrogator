@@ -9,9 +9,7 @@ on:
       - "mkdocs/**"
       - "mkdocs.yml"
       - "overrides/**"
-      - "pyproject.toml"
       - "requirements.txt"
-      - "src/snippets_mkdocs/**"
 
   workflow_dispatch:
 

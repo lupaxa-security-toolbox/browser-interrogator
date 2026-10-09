@@ -147,7 +147,7 @@ describe("shouldSkipNode", () => {
   });
 
   it("skips the GitHub source chip", () => {
-    const label = text("snippets");
+    const label = text("browser-interrogator");
     const version = text("v0.2.4");
     const repo = element("div", { class: "md-source__repository" }, [
       label,

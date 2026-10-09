@@ -15,7 +15,7 @@ on:
       - "Makefile"
       - "tox.ini"
       - ".python-version"
-      - "src/**"
+      - "hooks/**"
       - "tests/**"
   pull_request:
     branches:
@@ -33,7 +33,7 @@ on:
       - "Makefile"
       - "tox.ini"
       - ".python-version"
-      - "src/**"
+      - "hooks/**"
       - "tests/**"
 
 concurrency:

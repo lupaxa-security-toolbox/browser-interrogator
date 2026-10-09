@@ -1,8 +1,5 @@
-# Default version file for makefile-skills versioning (bump-my-version).
-# Defaults below are safe for local testing: no commit, no tag, no push.
-# When ready to release for real, uncomment the Git / hook settings noted below
-# and add [[tool.bumpversion.files]] entries for this project's version sources
-# (e.g. pyproject.toml, src/.../version.py).
+# Version file for makefile-skills versioning (bump-my-version).
+# This repository is a website. The release version lives here.
 
 [tool.bumpversion]
 current_version = "0.1.0"
@@ -20,10 +17,7 @@ regex = false
 ignore_missing_version = false
 ignore_missing_files = false
 
-# Git integration — off by default so `make bump-*` can be tested without
-# creating commits/tags. To enable releases:
-#   1. Set allow_dirty / commit / tag as below (or uncomment the release block)
-#   2. Uncomment post_commit_hooks to push after bump
+# Releases commit, tag, and push.
 allow_dirty = false
 commit = true
 message = "Release {new_version}"
@@ -44,11 +38,3 @@ post_commit_hooks = [
   "git push",
   "git push --tags",
 ]
-
-[[tool.bumpversion.files]]
-filename = "pyproject.toml"
-
-[[tool.bumpversion.files]]
-filename = "src/snippets_mkdocs/__init__.py"
-search = '__version__ = "{current_version}"'
-replace = '__version__ = "{new_version}"'
