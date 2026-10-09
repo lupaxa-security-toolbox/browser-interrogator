@@ -54,9 +54,10 @@ tunnel, or a clock set for somewhere else. It is not proof of any of those.
 ### Reverse Name
 
 When the address lookup returns an IP, the page asks Cloudflare for the
-pointer record:
-
-`https://cloudflare-dns.com/dns-query?name=…&type=PTR`
+pointer record. That request uses the
+[JSON DNS API](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)
+at `cloudflare-dns.com`, path `dns-query`, with `name` set to the reversed
+address and `type` set to `PTR`.
 
 The request sends `Accept: application/dns-json`. An IPv4 address is
 reversed by octet and given the suffix `.in-addr.arpa`. An IPv6 address is
@@ -66,7 +67,8 @@ has no PTR, the row says **No reverse name**.
 
 ### Registration Record
 
-The same IP is sent to `https://rdap.org/ip/` plus the address. Colons in
+The same IP is sent to [rdap.org](https://rdap.org/) on the path `/ip/`
+plus the address. Colons in
 an IPv6 address are left as they are. Encoding them makes the registry
 reject the request. `rdap.org` redirects to the registry that holds the
 block, such as RIPE or ARIN, and the browser follows that redirect.
