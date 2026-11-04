@@ -5,6 +5,9 @@
 .superpowers/
 cursor-docs
 
+# Cloudflare
+.wrangler/
+
 # Editors
 .idea/
 .vscode/*

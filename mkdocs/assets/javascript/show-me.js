@@ -8,6 +8,7 @@
 
   const { onPageRender } = window.LupaxaPageLifecycle;
 
+  const EDGE_URL = "https://browser-interrogator.thelupaxaproject.workers.dev/";
   const LOOKUP_URL = "https://ipwho.is/";
   const LOOKUP_FALLBACKS = ["https://ipapi.co/json/", "https://freeipapi.com/api/json"];
   const EU_COUNTRIES = new Set(
@@ -314,9 +315,68 @@
   };
 
   /**
+   * The site's Worker saw this connection. Fold that JSON into the table shape.
+   *
+   * @param {Record<string, unknown> | null} payload
+   * @returns {Record<string, unknown> | null}
+   */
+  const fromEdge = (payload) => {
+    if (!payload || typeof payload.ip !== "string" || !payload.ip) return null;
+    const countryCode = typeof payload.country_code === "string" ? payload.country_code : "";
+    const continentCode = typeof payload.continent_code === "string" ? payload.continent_code : "";
+    const registration =
+      payload.registration && typeof payload.registration === "object" ? payload.registration : null;
+    return {
+      ip: payload.ip,
+      type: payload.version || "",
+      city: payload.city || "",
+      region: payload.region || "",
+      region_code: payload.region_code || "",
+      country: payload.country || "",
+      country_code: countryCode,
+      continent: payload.continent || CONTINENTS[continentCode] || "",
+      continent_code: continentCode,
+      postal: payload.postal_code || "",
+      metro: payload.metro_code || "",
+      latitude: payload.latitude,
+      longitude: payload.longitude,
+      is_eu: payload.is_eu,
+      flag: { emoji: flagEmoji(countryCode) },
+      connection: {
+        asn: payload.asn || "",
+        org: payload.organization || "",
+        isp: payload.organization || "",
+      },
+      timezone: zoneDetails(typeof payload.timezone === "string" ? payload.timezone : "", ""),
+      edge: {
+        colo: payload.colo || "",
+        http_protocol: payload.http_protocol || "",
+        tls_version: payload.tls_version || "",
+        tls_cipher: payload.tls_cipher || "",
+        tcp_rtt: payload.client_tcp_rtt,
+        quic_rtt: payload.client_quic_rtt,
+        cipher_list_hash: payload.cipher_list_hash || "",
+        extension_list_hash: payload.extension_list_hash || "",
+        extension_list_hash_le: payload.extension_list_hash_le || "",
+        hello_length: payload.client_hello_length || "",
+        client_random: payload.client_random || "",
+        delivery_rate: payload.delivery_rate,
+        request_priority: payload.request_priority || "",
+        accept_encoding: payload.accept_encoding || "",
+        client_certificate: payload.client_certificate || "",
+        headers: Array.isArray(payload.headers) ? payload.headers : [],
+      },
+      reverse_name: typeof payload.reverse_name === "string" ? payload.reverse_name : "",
+      registration,
+    };
+  };
+
+  /**
    * @returns {Promise<Record<string, unknown> | null>}
    */
   const lookupAddress = async () => {
+    const edge = fromEdge(await readJson(EDGE_URL));
+    if (edge) return edge;
     const ipwho = await readJson(LOOKUP_URL);
     if (ipwho && ipwho.success !== false && typeof ipwho.ip === "string" && ipwho.ip) return ipwho;
     const ipapi = fromIpapi(await readJson(LOOKUP_FALLBACKS[0]));
@@ -879,6 +939,7 @@
       ["Region", region],
       ["City", payload ? shown(payload.city) : ""],
       ["Postal Code", payload ? shown(payload.postal) : ""],
+      ["Metro Code", payload ? shown(payload.metro) : ""],
       ["Continent", continent],
       ["Coordinates", coordinates],
       [
@@ -929,8 +990,45 @@
       ["WebRTC Network", namedIce(ice ? ice.networks : [], networkNames)],
     ];
 
+    const edge = payload && payload.edge;
+    const edgeRtt =
+      edge && typeof edge.quic_rtt === "number"
+        ? `${edge.quic_rtt} ms`
+        : edge && typeof edge.tcp_rtt === "number"
+          ? `${edge.tcp_rtt} ms`
+          : "";
+    const helloLength =
+      edge && edge.hello_length ? `${edge.hello_length} bytes` : "";
+    const deliveryRate =
+      edge && typeof edge.delivery_rate === "number" ? `${formatBytes(edge.delivery_rate)}/s` : "";
+    const edgeHeaderNames = edge && Array.isArray(edge.headers)
+      ? edge.headers.map((pair) => (Array.isArray(pair) ? pair[0] : "")).filter(Boolean)
+      : [];
+    const edgeHeaderLines = edge && Array.isArray(edge.headers)
+      ? edge.headers
+          .map((pair) => (Array.isArray(pair) && pair.length >= 2 ? `${pair[0]}: ${pair[1]}` : ""))
+          .filter(Boolean)
+          .join("; ")
+      : "";
+
     const web = [
       ["HTTP Protocol", navigation && "nextHopProtocol" in navigation ? navigation.nextHopProtocol : ""],
+      ["Edge Protocol", edge ? shown(edge.http_protocol) : ""],
+      ["Edge TLS Version", edge ? shown(edge.tls_version) : ""],
+      ["Edge TLS Cipher", edge ? shown(edge.tls_cipher) : ""],
+      ["Edge Datacenter", edge ? shown(edge.colo) : ""],
+      ["Edge Round Trip", edgeRtt],
+      ["Cipher List Hash", edge ? shown(edge.cipher_list_hash) : ""],
+      ["Extension List Hash", edge ? shown(edge.extension_list_hash) : ""],
+      ["Extension List Hash (LE)", edge ? shown(edge.extension_list_hash_le) : ""],
+      ["Client Hello Length", helloLength],
+      ["Client Random", edge ? shown(edge.client_random) : ""],
+      ["Delivery Rate", deliveryRate],
+      ["Request Priority", edge ? shown(edge.request_priority) : ""],
+      ["Original Accept-Encoding", edge ? shown(edge.accept_encoding) : ""],
+      ["Client Certificate", edge ? shown(edge.client_certificate) : ""],
+      ["Edge Header Order", edgeHeaderNames.join(", ")],
+      ["Edge Headers", edgeHeaderLines],
       ["JA3", handshake ? shown(handshake.ja3) : ""],
       ["JA3 Hash", handshake ? shown(handshake.ja3_hash) : ""],
       ["JA4", handshake ? shown(handshake.ja4) : "Lookup failed"],
@@ -1762,16 +1860,30 @@
     const payload = addressResult.status === "fulfilled" ? addressResult.value : null;
     const ice = announcedResult.status === "fulfilled" ? announcedResult.value : null;
     const ip = payload && typeof payload.ip === "string" ? payload.ip : "";
-    const [hostResult, registrationResult] = ip
-      ? await Promise.allSettled([lookupHostname(ip), lookupRegistration(ip)])
-      : [];
+    const fromEdgeLookup = Boolean(payload && payload.edge);
+    const [hostResult, registrationResult] =
+      ip && !fromEdgeLookup
+        ? await Promise.allSettled([lookupHostname(ip), lookupRegistration(ip)])
+        : [];
     if (current !== generation) return;
     if (!document.body.contains(internet)) return;
-    const hostname = hostResult && hostResult.status === "fulfilled" ? hostResult.value : "";
-    const registration =
-      registrationResult && registrationResult.status === "fulfilled"
+    const hostname = fromEdgeLookup
+      ? payload.reverse_name || ""
+      : hostResult && hostResult.status === "fulfilled"
+        ? hostResult.value
+        : "";
+    let registration = fromEdgeLookup
+      ? payload.registration || null
+      : registrationResult && registrationResult.status === "fulfilled"
         ? registrationResult.value
         : null;
+    if (ip && !registration) {
+      try {
+        registration = await lookupRegistration(ip);
+      } catch {
+        registration = null;
+      }
+    }
     const handshake =
       handshakeResult.status === "fulfilled" ? handshakeResult.value : null;
     const localProbe =

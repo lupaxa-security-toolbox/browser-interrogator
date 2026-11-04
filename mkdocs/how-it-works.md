@@ -6,8 +6,13 @@ anything or asking for permission. A normal website can collect the same
 facts on every visit. There is no program, no browser extension, and no
 account.
 
-The address lookup, the reverse name, and the registration record leave
-the browser. So does one more request, to a public handshake reader at
+The address lookup goes to a Cloudflare Worker run for this site. That
+one request returns the address, the reverse name, and the registration
+record, and it describes the connection that loaded this page. The Worker
+sends the answer back and does not keep a copy. If that request fails, the
+page falls back to the public lookups below.
+
+One more request goes to a public handshake reader at
 [kittens.sh](https://kittens.sh/). That service finishes the TLS connection
 itself and sends back the JA3 and JA4 fingerprints, the cipher list, and
 the header order. The script in this page cannot see the handshake that
@@ -24,37 +29,73 @@ not blank the rest of the table.
 
 ## Requests That Leave the Browser
 
-Five contacts can leave the machine. Four are HTTPS fetches. One is a STUN
-packet. None of them ask for a permission prompt.
+On a normal visit, three contacts leave the machine. Two are HTTPS fetches,
+one to this site's Worker and one to the handshake reader. One is a STUN
+packet. None of them ask for a permission prompt. If the Worker does not
+answer, the page adds the public address lookup, and then the reverse name
+and the registration record.
 
 ### Address Lookup
 
-The page fetches `https://ipwho.is/`. The response is the public address
-that made that request, which is the same address a site sees for the page
-view. That service limits how often one address may ask. When it refuses,
-the page asks `https://ipapi.co/json/` and then
+The page fetches
+`https://browser-interrogator.thelupaxaproject.workers.dev/`. Cloudflare
+terminates that connection and the Worker reads the address, network, and
+place that Cloudflare attached to the request. That is the same address a
+site sees for the page view. The Worker also asks Cloudflare for the
+pointer record and [rdap.org](https://rdap.org/) for the registration
+record, and returns all of it in one response.
+
+When the Worker does not answer, the page fetches `https://ipwho.is/`.
+That service limits how often one address may ask. When it refuses, the
+page asks `https://ipapi.co/json/` and then
 `https://freeipapi.com/api/json/`, and fills the same rows from whichever
-one answers.
+one answers. The reverse name and the registration record then leave the
+browser as their own requests, as described below.
 
 From that JSON the table takes the address and IP version, the ASN, ISP,
 organisation, and network domain, and the country, region, city, postal
 code, continent, and coordinates. It also takes whether the country is in
 the EU, the calling code, capital, bordering countries, and flag, plus the
-network time zone, UTC offset, and daylight-saving flag. A fallback that
-omits one of those leaves the row as **Not available**. The flag, when the
-response has no emoji of its own, is the emoji for the country code.
+network time zone, UTC offset, and daylight-saving flag. A response that
+omits one of those leaves the row as **Not available**. The flag is the
+emoji for the country code. The Worker does not supply a calling code, a
+capital, or a list of bordering countries, so those rows stay
+**Not available** until a fallback includes them.
 
-The first lookup has no VPN, proxy, Tor, or hosting flag. One fallback can
+The Worker has no VPN, proxy, Tor, or hosting flag. One fallback can
 include a proxy flag, and that value is shown only when the response
 contains it. The page does not invent one. The honest comparison is
 **Time Zone Agrees**: the browser time zone from `Intl.DateTimeFormat`,
 set beside the time zone of the network. A mismatch can mean a VPN, a
 tunnel, or a clock set for somewhere else. It is not proof of any of those.
 
+### This Connection
+
+The Worker also returns what Cloudflare recorded for the connection that
+loaded the page. That is separate from the handshake reader, which
+describes a second connection.
+
+The table takes the HTTP protocol, the TLS version, and the negotiated
+cipher. It takes the datacenter code, the round trip from the browser to
+Cloudflare, and the estimated delivery rate. It takes the length of the
+ClientHello, the 32-byte client random, and SHA-1 hashes of the cipher
+list and the extension list. The extension hash is shown twice, once for
+each byte order Cloudflare records. Those hashes are not the JA3 or JA4
+strings. The named cipher list and JA4 still come from the handshake
+reader.
+
+It also takes the HTTP/2 priority the browser asked for, the original
+Accept-Encoding when Cloudflare replaced that header, and whether a
+client certificate was presented. The header names and values are the
+request Cloudflare handed the Worker, in arrival order, after Cloudflare
+added its own headers. The metro code, when Cloudflare knows one, is the
+US media market for the address.
+
 ### Reverse Name
 
-When the address lookup returns an IP, the page asks Cloudflare for the
-pointer record. That request uses the
+When the Worker answered, the reverse name in the table is the one it
+returned. When the page had to fall back, and the address lookup returns
+an IP, the page asks Cloudflare for the pointer record. That request uses the
 [JSON DNS API](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/)
 at `cloudflare-dns.com`, path `dns-query`, with `name` set to the reversed
 address and `type` set to `PTR`.
@@ -67,8 +108,10 @@ has no PTR, the row says **No reverse name**.
 
 ### Registration Record
 
-The same IP is sent to [rdap.org](https://rdap.org/) on the path `/ip/`
-plus the address. Colons in
+When the Worker answered with a registration record, the table uses that
+record. Some registries refuse the Worker's request. When that happens, or
+when the page had to fall back for the address, the same IP is sent to
+[rdap.org](https://rdap.org/) on the path `/ip/` plus the address. Colons in
 an IPv6 address are left as they are. Encoding them makes the registry
 reject the request. `rdap.org` redirects to the registry that holds the
 block, such as RIPE or ARIN, and the browser follows that redirect.
