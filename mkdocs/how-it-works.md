@@ -39,8 +39,7 @@ and the registration record.
 
 ### Address Lookup
 
-The page fetches
-`https://browser-interrogator.thelupaxaproject.workers.dev/`. Cloudflare
+The page fetches data from a custom Cloudflare Worker. Cloudflare
 terminates that connection and the Worker reads the address, network, and
 place that Cloudflare attached to the request. That is the same address a
 site sees for the page view. The Worker also asks Cloudflare for the

@@ -132,7 +132,15 @@
         const labelCell = document.createElement("td");
         const valueCell = document.createElement("td");
         labelCell.textContent = label;
-        valueCell.textContent = shown(value);
+        const text = shown(value);
+        if (label === "Flag" && text !== "Not available") {
+          const flag = document.createElement("span");
+          flag.className = "show-me-flag";
+          flag.textContent = text;
+          valueCell.append(flag);
+        } else {
+          valueCell.textContent = text;
+        }
         row.append(labelCell, valueCell);
         return row;
       }),
@@ -1897,7 +1905,17 @@
     }
   };
 
+  const bindResultsPrint = () => {
+    const button = document.querySelector(".lupaxa-results-print");
+    if (!button || button.dataset.bound === "true") return;
+    button.dataset.bound = "true";
+    button.addEventListener("click", () => {
+      window.print();
+    });
+  };
+
   onPageRender(() => {
+    bindResultsPrint();
     fill();
   });
 })();

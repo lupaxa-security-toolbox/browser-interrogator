@@ -50,17 +50,57 @@
   min-width: 0;
 }
 
+.md-typeset table:not([class]),
+.md-typeset .md-typeset__table table {
+  color: var(--md-default-fg-color);
+  background-color: var(--lupaxa-card-bg);
+  border: 1px solid color-mix(in srgb, var(--lupaxa-light-blue) 28%, transparent);
+}
+
 .md-typeset table:not([class]) th,
 .md-typeset .md-typeset__table table th {
   color: var(--lupaxa-white);
   background-color: var(--lupaxa-blue);
-  border-color: color-mix(in srgb, var(--lupaxa-blue) 85%, var(--lupaxa-white));
+  border-color: color-mix(in srgb, var(--lupaxa-light-blue) 35%, var(--lupaxa-blue));
   font-weight: 650;
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset .md-typeset__table table td {
+  color: var(--md-default-fg-color);
+  background-color: color-mix(in srgb, var(--lupaxa-dark-blue) 35%, var(--lupaxa-card-bg));
+  border-top-color: color-mix(in srgb, var(--lupaxa-light-blue) 22%, transparent);
+}
+
+.md-typeset table:not([class]) tbody tr:nth-child(even) td,
+.md-typeset .md-typeset__table table tbody tr:nth-child(even) td {
+  background-color: color-mix(in srgb, var(--lupaxa-card-bg-raised) 55%, var(--lupaxa-card-bg));
+}
+
+.md-typeset table:not([class]) tbody tr:hover,
+.md-typeset .md-typeset__table table tbody tr:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.md-typeset table:not([class]) tbody tr:hover td,
+.md-typeset .md-typeset__table table tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--lupaxa-light-blue) 16%, var(--lupaxa-card-bg-raised));
 }
 
 .md-typeset table:not([class]) th a,
 .md-typeset .md-typeset__table table th a {
   color: var(--lupaxa-white);
+}
+
+/* Scale the painted flag only. Transform does not change the row height. */
+.md-typeset .show-me-flag {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+  vertical-align: -0.12em;
+  transform: scale(1.6);
+  transform-origin: left center;
 }
 
 /* 2 columns — label | description */

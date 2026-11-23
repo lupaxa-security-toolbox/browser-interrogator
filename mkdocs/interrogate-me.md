@@ -1,4 +1,6 @@
-# Interrogate Me
+---
+title: Interrogate Me
+---
 
 !!! note
 
@@ -20,7 +22,21 @@
     [How it Works](how-it-works.md) explains each lookup, including which
     requests leave the browser.
 
-## Internet Connection
+<div class="lupaxa-results-heading" markdown>
+
+## Interrogation Results
+
+<button type="button" class="lupaxa-results-print" aria-label="Print interrogation results">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="currentColor" d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3m-3 11H8v-5h8zm3-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2M6 3h12v4H6z"/>
+  </svg>
+</button>
+
+</div>
+
+<div class="lupaxa-page-card lupaxa-results-card" markdown>
+
+### Internet Connection
 
 <table id="show-me-internet">
   <thead>
@@ -37,7 +53,7 @@
   </tbody>
 </table>
 
-## Web Connection
+### Web Connection
 
 <table id="show-me-web">
   <thead>
@@ -54,7 +70,7 @@
   </tbody>
 </table>
 
-## Device
+### Device
 
 <table id="show-me-device">
   <thead>
@@ -71,7 +87,7 @@
   </tbody>
 </table>
 
-## Browser
+### Browser
 
 <table id="show-me-browser">
   <thead>
@@ -87,3 +103,5 @@
     </tr>
   </tbody>
 </table>
+
+</div>

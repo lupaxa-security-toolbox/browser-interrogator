@@ -15,7 +15,7 @@ def test_page_asks_the_worker_before_the_public_lookups() -> None:
     assert EDGE in PAGE
     assert PAGE.index(EDGE) < PAGE.index("https://ipwho.is/")
     assert "Edge TLS Version" in PAGE
-    assert EDGE in DOCS
+    assert "Cloudflare Worker run for this site" in DOCS
 
 
 def test_worker_discards_the_visit() -> None:

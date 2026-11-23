@@ -4,25 +4,6 @@ hide:
   - toc
 ---
 
-<div class="print-page-notice">
-    <p class="print-page-notice__title">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 2 1 21h22L12 2zm0 3.84L19.53 19.5H4.47L12 5.84zM11 10h2v5h-2v-5zm0 6h2v2h-2v-2z"/>
-        </svg>
-        Printing Unavailable
-    </p>
-    <p>
-        This page is designed for online viewing and is not included in printed
-        output. Please refer to the online version for the complete content.
-    </p>
-    <p class="print-page-notice__online">
-        Online version:<br>
-        https://browserinterrogator.com/sponsor/
-    </p>
-</div>
-
-<div class="no-print-page" markdown>
-
 <div class="about-introduction about-introduction-lead">
     <p>
         <strong translate="no">The Lupaxa Project</strong> is an informal collective, not a
@@ -87,5 +68,11 @@ hide:
     >Or open our Ko-fi page</a>
   </p>
 </div>
+
+<div class="about-introduction sponsor-print-card" markdown>
+
+:material-hand-heart-outline:{ .lg .middle } **Sponsor Link**
+
+[https://ko-fi.com/thelupaxaproject](https://ko-fi.com/thelupaxaproject)
 
 </div>

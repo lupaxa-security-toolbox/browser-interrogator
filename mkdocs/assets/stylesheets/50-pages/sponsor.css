@@ -9,9 +9,14 @@
   row-gap: var(--lupaxa-spacing-md);
 }
 
-.no-print-page > .about-introduction {
+.about-introduction.about-introduction-lead,
+.about-introduction.sponsor-close {
   margin-top: var(--lupaxa-spacing-md);
   margin-bottom: var(--lupaxa-spacing-md);
+}
+
+.sponsor-print-card {
+  display: none;
 }
 
 .about-introduction.sponsor-close p {

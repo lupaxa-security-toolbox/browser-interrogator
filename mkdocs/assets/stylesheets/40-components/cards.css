@@ -46,13 +46,134 @@ article.md-content__inner:has(> .lupaxa-page-card:first-child)::before {
   box-shadow: var(--lupaxa-shadow-panel);
 }
 
-.md-typeset .lupaxa-page-card > h1:first-child {
+.md-typeset .lupaxa-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lupaxa-spacing-md);
+  margin-top: var(--lupaxa-spacing-md);
+  margin-bottom: var(--lupaxa-spacing-md);
+}
+
+.md-typeset .lupaxa-results-heading > h2,
+.md-typeset .lupaxa-results-heading > p {
+  margin: 0;
+}
+
+.md-typeset .lupaxa-results-print {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0;
+  padding: 0;
+  color: var(--lupaxa-white);
+  cursor: pointer;
+  background-color: var(--lupaxa-blue);
+  border: 1px solid var(--lupaxa-blue);
+  border-radius: var(--lupaxa-radius-button);
+  transition:
+    color var(--lupaxa-transition-fast),
+    background-color var(--lupaxa-transition-fast),
+    border-color var(--lupaxa-transition-fast);
+}
+
+.md-typeset .lupaxa-results-print:hover,
+.md-typeset .lupaxa-results-print:focus,
+.md-typeset .lupaxa-results-print:focus-visible {
+  color: var(--lupaxa-dark-blue);
+  background-color: var(--lupaxa-light-blue);
+  border-color: var(--lupaxa-light-blue);
+}
+
+.md-typeset .lupaxa-results-print svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.md-typeset .lupaxa-page-card > :first-child {
   margin-top: 0;
+}
+
+.md-typeset .lupaxa-page-card > :last-child,
+.md-typeset .lupaxa-page-card > :last-child .md-typeset__table {
+  margin-bottom: 0;
+}
+
+.md-typeset .lupaxa-results-card > h3:not(:first-child) {
+  margin-top: var(--lupaxa-spacing-md);
+}
+
+.md-typeset .lupaxa-results-card > .md-typeset__scrollwrap:not(:last-child) .md-typeset__table {
+  margin-bottom: 0;
 }
 
 .md-typeset .admonition {
   overflow: hidden;
   border-radius: var(--lupaxa-radius-card);
+}
+
+/* Same card as the rest of the site. The label and border stay in the
+   accent colour so this still reads as a note. */
+article.md-content__inner:has(> .admonition.note:first-child)::before {
+  content: "";
+  display: block;
+  height: var(--lupaxa-spacing-md);
+}
+
+.md-typeset .admonition.note {
+  margin: 0 0 var(--lupaxa-spacing-lg);
+  padding: var(--lupaxa-spacing-md);
+  color: inherit;
+  font-size: inherit;
+  background: linear-gradient(180deg, var(--lupaxa-card-bg-raised), var(--lupaxa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--lupaxa-light-blue) 70%, transparent);
+  border-radius: var(--lupaxa-radius-card);
+  box-shadow: var(--lupaxa-shadow-card);
+}
+
+.md-typeset .admonition.note:focus-within {
+  box-shadow: var(--lupaxa-shadow-card);
+}
+
+[dir="ltr"] .md-typeset .admonition.note > .admonition-title,
+[dir="rtl"] .md-typeset .admonition.note > .admonition-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  color: var(--lupaxa-light-blue);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  background: none;
+  border: 0;
+}
+
+[dir="ltr"] .md-typeset .admonition.note > .admonition-title::before,
+[dir="rtl"] .md-typeset .admonition.note > .admonition-title::before {
+  position: static;
+  top: auto;
+  left: auto;
+  right: auto;
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  background-color: var(--lupaxa-light-blue);
+}
+
+.md-typeset .admonition.note > p:not(.admonition-title) {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  -webkit-hyphens: auto;
+}
+
+html .md-typeset .admonition.note > :last-child {
+  margin-bottom: 0;
 }
 
 .md-typeset .lupaxa-page-card p {
