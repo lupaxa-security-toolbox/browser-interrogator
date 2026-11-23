@@ -48,7 +48,7 @@ article.md-content__inner:has(> .lupaxa-page-card:first-child)::before {
 
 .md-typeset .lupaxa-results-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--lupaxa-spacing-md);
   margin-top: var(--lupaxa-spacing-md);
@@ -132,6 +132,10 @@ article.md-content__inner:has(> .admonition.note:first-child)::before {
   border: 1px solid color-mix(in srgb, var(--lupaxa-light-blue) 70%, transparent);
   border-radius: var(--lupaxa-radius-card);
   box-shadow: var(--lupaxa-shadow-card);
+}
+
+.md-typeset .admonition.note:has(+ .lupaxa-results-heading) {
+  margin-bottom: 0;
 }
 
 .md-typeset .admonition.note:focus-within {
