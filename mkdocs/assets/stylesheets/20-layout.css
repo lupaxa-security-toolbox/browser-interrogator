@@ -3,6 +3,12 @@
  * Global Layout
  * ============================================================================= */
 
+body,
+.md-container,
+.md-main {
+  background-color: var(--lupaxa-dark-blue);
+}
+
 .md-main__inner {
   margin-top: 0;
 }

@@ -5,17 +5,26 @@
 
 .md-typeset .grid.cards.sponsor-reasons {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: var(--lupaxa-spacing-md);
+  row-gap: var(--lupaxa-spacing-md);
+}
+
+.no-print-page > .about-introduction {
+  margin-top: var(--lupaxa-spacing-md);
+  margin-bottom: var(--lupaxa-spacing-md);
 }
 
 .about-introduction.sponsor-close p {
   color: var(--lupaxa-light-blue);
-  font-size: 20px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
   text-align: center;
 }
 
 .md-typeset .sponsor-reasons > ul > li,
 .md-typeset .sponsor-reasons > li {
-  padding: var(--lupaxa-spacing-md) 1.4rem;
+  padding: var(--lupaxa-spacing-md);
 }
 
 .md-typeset .sponsor-reasons > ul > li > p:first-child,
@@ -28,18 +37,18 @@
 }
 
 .sponsor-widget {
-  margin: 1.5rem 0 var(--lupaxa-spacing-lg);
-  padding: 1.25rem;
+  margin: var(--lupaxa-spacing-md) 0 var(--lupaxa-spacing-lg);
+  padding: var(--lupaxa-spacing-md);
   overflow: hidden;
   background:
     linear-gradient(
       145deg,
       color-mix(
         in srgb,
-        var(--md-default-bg-color) 96%,
+        var(--lupaxa-card-bg-raised) 96%,
         var(--lupaxa-blue)
       ),
-      var(--md-default-bg-color)
+      var(--lupaxa-card-bg)
     );
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: var(--lupaxa-radius-card);

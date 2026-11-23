@@ -17,9 +17,19 @@
     display: none !important;
   }
 
+  html,
+  body,
+  .md-container,
+  .md-main,
+  .md-content,
   .md-content__inner {
     max-width: none;
     margin: 0;
+    background: #ffffff !important;
+    color: #111a32;
+  }
+
+  .md-content__inner {
     padding: 0;
   }
 
@@ -45,8 +55,9 @@
      full width, which is the mobile layout and wastes the page. */
   .md-typeset .grid.cards,
   .md-typeset .grid.cards.catalogue-grid,
-  .md-typeset .grid.cards.catalogue-grid--latest,
-  .md-typeset .grid.cards.catalogue-grid.catalogue-grid--languages,
+  .md-typeset .grid.cards.about-summary,
+  .md-typeset .grid.cards.about-principles,
+  .md-typeset .grid.cards.about-build,
   .md-typeset .grid.cards.sponsor-reasons {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -54,42 +65,88 @@
   }
 
   .md-typeset .grid.cards > ul > li,
-  .md-typeset .grid.cards > li {
+  .md-typeset .grid.cards > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards > li {
     padding: 0.45rem 0.55rem;
+    background: #ffffff !important;
+    color: #111a32;
+    border-color: rgba(0, 0, 0, 0.35);
+    box-shadow: none;
   }
 
   .md-typeset .catalogue-grid img.catalogue-logo {
     max-width: min(100%, 72px);
   }
 
-  /* Screen titles are left-aligned. Centre them on paper like language cards. */
-  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child,
-  .md-typeset .grid.cards.catalogue-grid > li > p:first-child,
-  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child strong,
-  .md-typeset .grid.cards.catalogue-grid > li > p:first-child strong,
-  .md-typeset .grid.cards.catalogue-grid > ul > li > p:first-child a,
-  .md-typeset .grid.cards.catalogue-grid > li > p:first-child a {
-    text-align: center;
-  }
-
-  .md-typeset .catalogue-grid > ul > li > p:has(> .catalogue-category),
-  .md-typeset .catalogue-grid > li > p:has(> .catalogue-category) {
-    flex-wrap: nowrap;
+  .md-typeset .catalogue-grid > ul > li > p:has(> .catalogue-category, > .catalogue-language),
+  .md-typeset .catalogue-grid > li > p:has(> .catalogue-category, > .catalogue-language) {
+    flex-wrap: wrap;
     gap: 0.15rem;
   }
 
-  .md-typeset .catalogue-category {
+  .md-typeset .catalogue-category[hidden] {
+    display: inline-block !important;
+  }
+
+  .catalogue-category-more {
+    display: none !important;
+  }
+
+  .md-typeset .catalogue-category,
+  .md-typeset .catalogue-language {
     padding: 0.04rem 0.18rem;
     font-size: 0.48rem;
     line-height: 1.2;
   }
 
-  .md-typeset .lupaxa-article-card {
-    padding: 0;
-    background: none;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
+  /* GitHub and documentation links cannot be used on paper. */
+  .md-typeset .catalogue-title-link {
+    display: none !important;
+  }
+
+  .md-typeset .catalogue-action,
+  .md-typeset .catalogue-grid > ul > li > p:has(.catalogue-action),
+  .md-typeset .catalogue-grid > li > p:has(.catalogue-action),
+  .md-typeset .catalogue-grid > ul > li:has(.catalogue-action) > hr:last-of-type,
+  .md-typeset .catalogue-grid > li:has(.catalogue-action) > hr:last-of-type {
+    display: none;
+  }
+
+  /* Keep the on-screen footer sash. The negative margin matches the
+     tighter print padding so Version / Released stays flush on the
+     bottom edge, version on the left and date on the right. */
+  .md-typeset .grid.cards.catalogue-grid[data-project-catalogue] > ul > li > p:has(.catalogue-banner),
+  .md-typeset .grid.cards.catalogue-grid[data-project-catalogue] > li > p:has(.catalogue-banner),
+  .md-typeset .grid.cards.catalogue-grid[data-website-catalogue] > ul > li > p:has(.catalogue-banner),
+  .md-typeset .grid.cards.catalogue-grid[data-website-catalogue] > li > p:has(.catalogue-banner) {
+    margin: 0.45rem -0.55rem -0.45rem;
+  }
+
+  .md-typeset .catalogue-grid .catalogue-banner__band {
+    background: #ffffff !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.35);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .md-typeset .catalogue-grid .catalogue-banner__text,
+  .md-typeset .catalogue-grid .catalogue-banner__version,
+  .md-typeset .catalogue-grid .catalogue-banner__date {
+    color: #111a32 !important;
+  }
+
+  .md-typeset .catalogue-grid > ul > li > hr:first-of-type,
+  .md-typeset .catalogue-grid > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-organisation-catalogue] > ul > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-organisation-catalogue] > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-project-catalogue] > ul > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-project-catalogue] > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-website-catalogue] > ul > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-website-catalogue] > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-policy-catalogue] > ul > li > hr:first-of-type,
+  .md-typeset .grid.cards.catalogue-grid[data-policy-catalogue] > li > hr:first-of-type {
+    margin-top: 0.2rem;
   }
 
   .md-typeset .grid.cards > ul > li,
@@ -99,6 +156,24 @@
   .about-introduction,
   .about-name {
     break-inside: avoid;
+    background: #ffffff !important;
+    color: #111a32;
+    box-shadow: none;
+  }
+
+  .md-typeset .lupaxa-page-card {
+    background: #ffffff !important;
+    color: #111a32;
+    border-color: rgba(0, 0, 0, 0.35);
+    box-shadow: none;
+  }
+
+  .md-typeset .lupaxa-page-card code,
+  .md-typeset .lupaxa-page-card pre > code,
+  .md-typeset .lupaxa-page-card .highlight > pre {
+    background: #ffffff !important;
+    color: #111a32 !important;
+    border-color: rgba(0, 0, 0, 0.35);
     box-shadow: none;
   }
 
@@ -111,6 +186,58 @@
   .md-typeset a[href^="javascript:"]::after,
   .md-typeset .grid.cards a[href]::after {
     content: none;
+  }
+
+  /* Humour is absolutely positioned on screen. Flow it as two columns on paper. */
+  .humour-filters,
+  .humour-lightbox {
+    display: none !important;
+  }
+
+  .humour-masonry,
+  .humour-masonry.is-laid-out {
+    display: grid !important;
+    position: static !important;
+    height: auto !important;
+    max-width: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .humour-card {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    break-inside: avoid;
+    overflow: hidden;
+    background: none !important;
+    color: inherit !important;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: none;
+  }
+
+  .humour-play {
+    display: none;
+  }
+
+  .humour-meta,
+  .humour-comment,
+  .humour-date {
+    background: none !important;
+    color: #1a1a1a !important;
+    opacity: 1;
+  }
+
+  .humour-meta {
+    padding: 0.4rem 0.45rem 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  .humour-date {
+    color: #444444 !important;
   }
 
   .no-print-page {

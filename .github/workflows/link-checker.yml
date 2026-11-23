@@ -26,6 +26,9 @@ jobs:
     name: Link Checker
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-link-checker.yml@master
     secrets: inherit
+    with:
+      exclude_files: "^\\.venv/,^venv/,^site/,^\\.makefiles/,^cursor-docs/,\\.egg-info/,^\\.superpowers/,^\\.cursor/"
+      whitelist: "example.com"
 
   generate-workflow-summary:
     name: Generate Workflow Summary

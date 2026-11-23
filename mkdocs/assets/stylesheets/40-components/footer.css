@@ -5,7 +5,7 @@
 .md-footer,
 .md-footer-meta {
   color: var(--lupaxa-white);
-  background-color: var(--lupaxa-blue);
+  background: linear-gradient(180deg, var(--lupaxa-card-bg-raised), var(--lupaxa-card-bg));
 }
 
 .md-footer-meta {

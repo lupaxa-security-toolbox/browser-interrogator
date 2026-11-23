@@ -22,7 +22,6 @@
 .md-header .lupaxa-header__drawer-button,
 .md-header .md-header__button.md-logo.lupaxa-header__logo,
 .md-header .lupaxa-header__tools,
-.md-header .lupaxa-header__tools > .md-header__source,
 .md-header .lupaxa-lang-picker {
   position: relative;
   z-index: 50;
@@ -35,14 +34,14 @@
 }
 
 .md-header .md-header__button.md-logo.lupaxa-header__logo {
-  width: 4rem !important;
-  height: 4rem !important;
+  width: 64px !important;
+  height: 64px !important;
 }
 
 .md-header .md-header__button.md-logo.lupaxa-header__logo img,
 .md-header .md-header__button.md-logo.lupaxa-header__logo svg {
-  width: 4rem !important;
-  height: 4rem !important;
+  width: 64px !important;
+  height: 64px !important;
   max-width: none !important;
   max-height: none !important;
 }
@@ -55,26 +54,13 @@
 
 @media screen and (max-width: 76.234375em) {
   .md-header .md-header__button.md-logo.lupaxa-header__logo {
-    width: 3.25rem !important;
-    height: 3.25rem !important;
+    width: 64px !important;
+    height: 64px !important;
   }
 
   .md-header .md-header__button.md-logo.lupaxa-header__logo img,
   .md-header .md-header__button.md-logo.lupaxa-header__logo svg {
-    width: 3.25rem !important;
-    height: 3.25rem !important;
-  }
-}
-
-@media screen and (max-width: 44.984375em) and (orientation: portrait) {
-  .md-header .lupaxa-header__tools {
-    position: static;
-  }
-
-  .md-header .lupaxa-header__tools > .md-header__source {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 64px !important;
+    height: 64px !important;
   }
 }

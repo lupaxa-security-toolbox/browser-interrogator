@@ -30,6 +30,7 @@ extra:
   # Create a site at https://counter.dev and set a per-project id below.
   counter_dev_id: ef410665-76d4-43fe-9e91-53f26ed1004b
   counter_dev_utcoffset: 0
+  # Cloudflare Web Analytics (omit cloudflare_analytics_token to disable).
   social_image: assets/images/social-media-card.png
   social_image_width: 1200
   social_image_height: 630
@@ -57,9 +58,8 @@ validation:
 theme:
   name: material
   custom_dir: overrides
-  font:
-    text: IBM Plex Sans
-    code: IBM Plex Mono
+  # IBM Plex is self-hosted. Do not load it from Google Fonts.
+  font: false
   language: en
   logo: assets/images/logo.png
   favicon: assets/images/favicon.png
@@ -91,6 +91,7 @@ plugins: []
 
 hooks:
   - hooks/asset_cache_bust.py
+  - hooks/template_whitespace.py
 
 watch:
   - hooks
@@ -143,6 +144,7 @@ markdown_extensions:
 # =============================================================================
 
 extra_css:
+  - assets/stylesheets/00-fonts.css
   - assets/stylesheets/00-tokens.css
   - assets/stylesheets/10-base.css
   - assets/stylesheets/20-layout.css

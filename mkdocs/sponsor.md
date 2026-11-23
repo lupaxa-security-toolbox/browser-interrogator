@@ -38,8 +38,6 @@ hide:
 
 -   :material-clock-outline:{ .lg .middle } **Time**
 
-    ---
-
     Maintenance, reviews, documentation and the portal itself take unpaid
     hours. A small project stays healthy only while someone is still
     answering issues, cutting releases and keeping the docs honest. Support
@@ -48,16 +46,12 @@ hide:
 
 -   :material-server-outline:{ .lg .middle } **Running costs**
 
-    ---
-
     The ecosystem still has bills even when nobody is paid. Domain
     registration, hosting, CI minutes and the other small services that keep
     repositories and this site online add up. Sponsorship helps cover those
     so the work is not sitting on one person's card.
 
 -   :material-robot-outline:{ .lg .middle } **AI subscriptions**
-
-    ---
 
     Most Lupaxa Project work is built with AI-assisted editors and model
     subscriptions, not just this portal. Those tools make a volunteer team

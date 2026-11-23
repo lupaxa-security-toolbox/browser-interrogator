@@ -54,3 +54,4 @@ def test_apply_asset_version_replaces_an_existing_query() -> None:
 def test_mkdocs_registers_the_hook() -> None:
     yml = (Path(__file__).resolve().parent.parent / "mkdocs.yml").read_text(encoding="utf-8")
     assert "- hooks/asset_cache_bust.py" in yml
+    assert "- hooks/template_whitespace.py" in yml

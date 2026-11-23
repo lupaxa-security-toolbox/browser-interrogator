@@ -1,6 +1,66 @@
 /* =============================================================================
+ * The Lupaxa Project Portal
  * Shared Cards
  * ============================================================================= */
+
+/* Same top gap as the catalogue filter panel. A margin collapses
+   away under the header; the spacer does not. */
+article.md-content__inner:has(> .lupaxa-page-card:first-child)::before {
+  content: "";
+  display: block;
+  height: var(--lupaxa-spacing-md);
+}
+
+.md-typeset .lupaxa-page-card {
+  margin: 0 0 var(--lupaxa-spacing-lg);
+  padding: var(--lupaxa-spacing-md);
+  background: linear-gradient(180deg, var(--lupaxa-card-bg-raised), var(--lupaxa-card-bg));
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: var(--lupaxa-radius-card);
+  box-shadow: var(--lupaxa-shadow-card);
+}
+
+.md-typeset .lupaxa-page-card code {
+  padding: 0.12em 0.38em;
+  color: var(--md-code-fg-color);
+  font-size: 0.86em;
+  background: var(--lupaxa-dark-blue);
+  border: 1px solid color-mix(in srgb, var(--lupaxa-blue) 12%, transparent);
+  border-radius: var(--lupaxa-radius-sm);
+  box-shadow: none;
+}
+
+.md-typeset .lupaxa-page-card pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.md-typeset .lupaxa-page-card pre > code,
+.md-typeset .lupaxa-page-card .highlight > pre {
+  background: var(--lupaxa-dark-blue);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: var(--lupaxa-radius-sm);
+  box-shadow: var(--lupaxa-shadow-panel);
+}
+
+.md-typeset .lupaxa-page-card > h1:first-child {
+  margin-top: 0;
+}
+
+.md-typeset .admonition {
+  overflow: hidden;
+  border-radius: var(--lupaxa-radius-card);
+}
+
+.md-typeset .lupaxa-page-card p {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  -webkit-hyphens: auto;
+}
 
 .md-typeset .grid.cards {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
@@ -16,19 +76,10 @@
 .md-typeset .grid.cards > li {
   position: relative;
   margin: 0;
-  padding: 0.9rem 1.4rem;
+  padding: var(--lupaxa-spacing-md);
   overflow: hidden;
   cursor: default;
-  background:
-    linear-gradient(
-      145deg,
-      color-mix(
-        in srgb,
-        var(--md-default-bg-color) 96%,
-        var(--lupaxa-blue)
-      ),
-      var(--md-default-bg-color)
-    );
+  background: linear-gradient(180deg, var(--lupaxa-card-bg-raised), var(--lupaxa-card-bg));
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: var(--lupaxa-radius-card);
   box-shadow: var(--lupaxa-shadow-card);
@@ -45,17 +96,28 @@
       145deg,
       color-mix(
         in srgb,
-        var(--md-default-bg-color) 90%,
+        var(--lupaxa-card-bg-raised) 90%,
         var(--lupaxa-light-blue)
       ),
-      var(--md-default-bg-color)
+      var(--lupaxa-card-bg)
     );
   border-color: var(--lupaxa-card-hover-border);
   box-shadow: var(--lupaxa-shadow-card-hover);
 }
 
 .md-typeset .grid.cards strong {
-  font-size: 1.05rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Body copy matches the project catalogue description. */
+.md-typeset .grid.cards:not(.catalogue-grid) > ul > li > p:not(:first-child),
+.md-typeset .grid.cards:not(.catalogue-grid) > li > p:not(:first-child) {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
 }
 
 .md-typeset .grid.cards hr {
@@ -68,7 +130,23 @@
   color: var(--lupaxa-blue);
 }
 
-.md-typeset .grid.cards a {
+/* Icon sits beside a larger title. Middle-align would use the paragraph
+   font, which leaves the icon hanging below the title. */
+.md-typeset .grid.cards > ul > li > p:first-child:has(.twemoji),
+.md-typeset .grid.cards > li > p:first-child:has(.twemoji) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.35rem;
+}
+
+.md-typeset .grid.cards > ul > li > p:first-child:has(.twemoji) .lg,
+.md-typeset .grid.cards > li > p:first-child:has(.twemoji) .lg {
+  margin-right: 0;
+}
+
+.md-typeset .grid.cards a,
+.md-typeset .catalogue-action {
   cursor: pointer;
 }
 
@@ -86,6 +164,7 @@
   fill: currentcolor;
 }
 
+/* Body copy inside cards — keep titles / controls left or centred elsewhere. */
 .md-typeset .grid.cards > ul > li > p,
 .md-typeset .grid.cards > li > p {
   text-align: justify;
@@ -96,9 +175,17 @@
 
 .md-typeset .grid.cards > ul > li > p:first-child,
 .md-typeset .grid.cards > li > p:first-child {
-  text-align: left;
+  text-align: center;
   hyphens: manual;
   -webkit-hyphens: manual;
+}
+
+.md-typeset .grid.cards li:has(> p:only-child) {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,

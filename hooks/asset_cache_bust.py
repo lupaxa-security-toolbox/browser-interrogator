@@ -8,10 +8,31 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+# mkdocs serve sets this so CSS and JavaScript URLs change when the files do.
+_DEV_SERVER = False
 
 
-def asset_version(*, cwd: Path | None = None) -> str:
-    """Return a short git SHA, or ``dev`` when git is unavailable."""
+def on_serve(server: object, config: dict[str, Any], **kwargs: object) -> object:
+    """Mark this process as the dev server. The git SHA stays for real builds."""
+    del config, kwargs
+    global _DEV_SERVER
+    _DEV_SERVER = True
+    return server
+
+
+def dev_asset_token(paths: list[Path]) -> str:
+    """Return a token from the newest asset modification time."""
+    newest = 0
+    for path in paths:
+        if path.is_file():
+            newest = max(newest, path.stat().st_mtime_ns)
+    return f"dev{newest}"
+
+
+def asset_version(*, cwd: Path | None = None, asset_paths: list[Path] | None = None) -> str:
+    """Return a short git SHA, or a file-time token while ``mkdocs serve`` is running."""
+    if _DEV_SERVER:
+        return dev_asset_token(asset_paths or [])
     try:
         return subprocess.check_output(
             ["git", "rev-parse", "--short", "HEAD"],
@@ -49,5 +70,7 @@ def apply_asset_version(html: str, paths: list[str], version: str) -> str:
 
 def on_post_page(output: str, page: object, config: dict[str, Any]) -> str:
     del page
-    version = asset_version()
-    return apply_asset_version(output, extra_asset_paths(config), version)
+    relative = extra_asset_paths(config)
+    docs_dir = Path(str(config.get("docs_dir") or ""))
+    version = asset_version(asset_paths=[docs_dir / path for path in relative])
+    return apply_asset_version(output, relative, version)

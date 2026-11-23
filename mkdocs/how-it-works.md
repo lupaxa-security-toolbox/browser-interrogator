@@ -1,3 +1,5 @@
+<div class="lupaxa-page-card" markdown>
+
 # How it Works
 
 The tables on [Interrogate Me](interrogate-me.md) are filled when that page loads.
@@ -324,3 +326,5 @@ the local WebRTC probe, the handshake fetch, and the browser reads. When
 the address comes back, the reverse name and the registration record start
 together. If you leave the page and come back before a slow answer arrives,
 that late answer is dropped.
+
+</div>

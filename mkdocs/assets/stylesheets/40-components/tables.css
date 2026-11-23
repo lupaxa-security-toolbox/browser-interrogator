@@ -22,6 +22,8 @@
   max-width: 100% !important;
   margin-bottom: 0.5em;
   padding: 0 !important;
+  overflow: hidden;
+  border-radius: var(--lupaxa-radius-button);
   box-sizing: border-box;
 }
 
@@ -32,7 +34,10 @@
   max-width: 100% !important;
   table-layout: fixed;
   margin: 0 !important;
-  overflow: visible;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--lupaxa-radius-button);
+  overflow: hidden;
 }
 
 .md-typeset table:not([class]) th,

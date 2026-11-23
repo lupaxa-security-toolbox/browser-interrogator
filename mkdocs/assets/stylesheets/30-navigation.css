@@ -3,12 +3,16 @@
  * Custom Header Navigation
  * ============================================================================= */
 
+.md-header__source {
+  display: none !important;
+}
+
 .md-header {
   position: sticky;
   top: 0;
   z-index: 10;
   color: var(--lupaxa-white);
-  background-color: var(--lupaxa-blue);
+  background: linear-gradient(180deg, var(--lupaxa-card-bg-raised), var(--lupaxa-card-bg));
 }
 
 .md-header__inner {
@@ -33,8 +37,8 @@
 .md-header__button.md-logo.lupaxa-header__logo {
   display: inline-flex;
   flex: 0 0 auto;
-  width: 4rem;
-  height: 4rem;
+  width: 64px;
+  height: 64px;
   align-items: center;
   justify-content: center;
   margin: 0 0.75rem 0 0;
@@ -45,8 +49,8 @@
 .md-header__button.md-logo.lupaxa-header__logo img,
 .md-header__button.md-logo.lupaxa-header__logo svg {
   display: block;
-  width: 4rem;
-  height: 4rem;
+  width: 64px;
+  height: 64px;
   max-width: none;
   max-height: none;
   object-fit: contain;
@@ -89,9 +93,9 @@
   display: flex;
   height: 100%;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 0.75rem;
   color: rgb(255 255 255 / 72%);
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.2;
   white-space: nowrap;
@@ -100,15 +104,12 @@
   border-radius: 0;
   box-shadow: none;
   pointer-events: auto;
-  transition:
-    color var(--lupaxa-transition-fast),
-    font-weight var(--lupaxa-transition-fast);
+  transition: color var(--lupaxa-transition-fast);
 }
 
 .lupaxa-header__nav-link:hover,
 .lupaxa-header__nav-link:focus-visible {
   color: var(--lupaxa-white);
-  font-weight: 700;
   background: none;
   box-shadow: none;
 }
@@ -124,6 +125,8 @@
   text-decoration: none;
 }
 
+.lupaxa-header__nav-link:hover .lupaxa-header__nav-label,
+.lupaxa-header__nav-link:focus-visible .lupaxa-header__nav-label,
 .lupaxa-header__nav-item--active .lupaxa-header__nav-label {
   text-decoration: underline;
   text-decoration-color: var(--lupaxa-light-blue);
@@ -132,11 +135,9 @@
   text-decoration-skip-ink: auto;
 }
 
-/* Material controls — flush to the same right edge as the body */
+/* Language picker sits at the right of the header. */
 
 .lupaxa-header__tools {
-  --lupaxa-header-source-gap: 0.5rem;
-
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -150,35 +151,6 @@
   color: var(--lupaxa-white);
 }
 
-/* Repository link (top right) */
-
-.lupaxa-header__tools > .md-header__source {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  width: auto;
-  max-width: none;
-  margin-left: var(--lupaxa-header-source-gap);
-  padding-right: 0;
-  pointer-events: auto;
-}
-
-.md-header__source .md-source {
-  color: rgb(255 255 255 / 85%);
-  text-decoration: none;
-}
-
-.md-header__source .md-source:hover,
-.md-header__source .md-source:focus-visible {
-  color: var(--lupaxa-white);
-}
-
-.md-header__source .md-source__repository {
-  max-width: 14rem;
-}
-
 /* Language preference */
 
 .lupaxa-lang-picker {
@@ -187,7 +159,7 @@
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 0;
   padding: 0;
 }
 

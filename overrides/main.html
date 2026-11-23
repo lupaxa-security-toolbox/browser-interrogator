@@ -61,6 +61,13 @@
   ></script>
   {% endif %}
 
+  {# Cloudflare Web Analytics — only when extra.cloudflare_analytics_token is set #}
+  {% if config.extra.cloudflare_analytics_token %}
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ config.extra.cloudflare_analytics_token | e }}"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+  {% endif %}
+
   {% if config.extra.hide_primary_sidebar or config.extra.hide_secondary_sidebar %}
   <link
     rel="stylesheet"
@@ -143,8 +150,6 @@
      Standard metadata
      ------------------------------------------------------------------------- #}
 
-  <meta name="description" content="{{ social_description | e }}">
-  <meta name="author" content="{{ config.site_author | e }}">
   <meta name="application-name" content="{{ config.site_name | e }}">
   <meta name="theme-color" content="{{ config.extra.theme_color | d('#203959') }}">
   <meta name="color-scheme" content="dark">

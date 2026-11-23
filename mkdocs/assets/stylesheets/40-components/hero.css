@@ -17,7 +17,6 @@
       color-mix(in srgb, var(--lupaxa-blue) 8%, transparent),
       transparent
     );
-  border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 
 .lupaxa-hero-logo,

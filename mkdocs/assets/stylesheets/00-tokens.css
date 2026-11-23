@@ -8,7 +8,7 @@
 
   /* Same max-width as Material .md-grid, which is the header inner. */
   --lupaxa-content-width: 61rem;
-  --lupaxa-header-height: 5rem;
+  --lupaxa-header-height: 84px;
   /* Narrow screens inset the shared column. Desktop stays flush. */
   --lupaxa-gutter-left: 0px;
   --lupaxa-gutter-right: 0px;
@@ -27,6 +27,8 @@
   --lupaxa-blue: #203959;
   --lupaxa-light-blue: #6d95d3;
   --lupaxa-white: #ffffff;
+  --lupaxa-card-bg: #182743;
+  --lupaxa-card-bg-raised: #1d304f;
 
   /* Shape */
 
