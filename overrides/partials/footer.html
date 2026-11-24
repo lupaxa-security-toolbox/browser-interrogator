@@ -60,5 +60,26 @@
         {% include "partials/social.html" %}
       {% endif %}
     </div>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="{{ 'legal/privacy-policy/' | url }}">
+        <span class="footer-links-icon" aria-hidden="true">{% include ".icons/material/shield-lock-outline.svg" %}</span>
+        Privacy Policy
+      </a>
+      <span class="footer-links-sep" aria-hidden="true">-</span>
+      <a href="{{ 'legal/website-terms/' | url }}">
+        <span class="footer-links-icon" aria-hidden="true">{% include ".icons/material/scale-balance.svg" %}</span>
+        Website Terms
+      </a>
+      <span class="footer-links-sep" aria-hidden="true">-</span>
+      <a href="{{ 'legal/copyright-and-licensing/' | url }}">
+        <span class="footer-links-icon" aria-hidden="true">{% include ".icons/material/copyright.svg" %}</span>
+        Copyright<span class="footer-links-label-extra"> and Licensing</span>
+      </a>
+      <span class="footer-links-sep" aria-hidden="true">-</span>
+      <a href="{{ 'legal/disclaimer/' | url }}">
+        <span class="footer-links-icon" aria-hidden="true">{% include ".icons/material/alert-circle-outline.svg" %}</span>
+        Disclaimer
+      </a>
+    </nav>
   </div>
 </footer>

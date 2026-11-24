@@ -1,0 +1,80 @@
+/* =============================================================================
+ * Browser Interrogator
+ * Legal Notices
+ * ============================================================================= */
+
+.md-typeset .grid.cards.legal-notice {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: var(--lupaxa-spacing-md);
+}
+
+/* A full-height fade on a long notice washes out. Keep the same colours,
+   and finish the fade at the height of a normal card. */
+.md-typeset .grid.cards.legal-notice > ul > li,
+.md-typeset .grid.cards.legal-notice > li {
+  background-color: var(--lupaxa-card-bg);
+  background-image: linear-gradient(
+    180deg,
+    var(--lupaxa-card-bg-raised),
+    var(--lupaxa-card-bg) 8rem
+  );
+  background-repeat: no-repeat;
+}
+
+.md-typeset .grid.cards.legal-notice > ul > li:hover,
+.md-typeset .grid.cards.legal-notice > li:hover {
+  background-color: var(--lupaxa-card-bg);
+  background-image: linear-gradient(
+    145deg,
+    color-mix(
+      in srgb,
+      var(--lupaxa-card-bg-raised) 90%,
+      var(--lupaxa-light-blue)
+    ),
+    var(--lupaxa-card-bg) 8rem
+  );
+}
+
+.md-typeset .legal-notice > ul > li > p:first-child strong,
+.md-typeset .legal-notice > li > p:first-child strong {
+  font-size: 1.1rem;
+}
+
+.md-typeset .legal-notice .legal-ordinal::after {
+  content: attr(data-ordinal);
+  font-size: 0.65em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.md-typeset .legal-notice .privacy-control {
+  color: var(--lupaxa-light-blue);
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.md-typeset .legal-notice .privacy-control::after {
+  content: ".";
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset .legal-notice a.legal-mail::after {
+  content: ".";
+  color: var(--md-default-fg-color);
+  font-weight: 400;
+}
+
+.md-typeset .legal-notice p:has([data-analytics-choice]) {
+  margin-top: 0.85rem;
+}
+
+.md-typeset .legal-notice h3 {
+  margin: 1.15rem 0 0.45rem;
+  padding: 0;
+  color: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-align: left;
+}

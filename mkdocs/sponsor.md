@@ -50,23 +50,27 @@ hide:
 </div>
 
 <div class="sponsor-widget">
-  <div class="sponsor-widget-frame">
-    <iframe
-      id="kofiframe"
-      src="https://ko-fi.com/thelupaxaproject/?hidefeed=true&widget=true&embed=true"
-      aria-label="Support The Lupaxa Project on Ko-fi"
-      height="640"
-      scrolling="no"
-      loading="lazy"
-    ></iframe>
-  </div>
-  <p class="sponsor-widget-fallback">
+  <div class="sponsor-widget-actions">
+    <button type="button" class="md-button lupaxa-button sponsor-widget-open">
+      Open Ko-fi Widget
+    </button>
     <a
+      class="md-button lupaxa-button"
       href="https://ko-fi.com/thelupaxaproject"
       target="_blank"
       rel="noopener noreferrer"
-    >Or open our Ko-fi page</a>
-  </p>
+    >Open our Ko-fi Page</a>
+  </div>
+  <div class="sponsor-widget-frame">
+    <iframe
+      id="kofiframe"
+      data-src="https://ko-fi.com/thelupaxaproject/?hidefeed=true&widget=true&embed=true"
+      aria-label="Support The Lupaxa Project on Ko-fi"
+      height="640"
+      scrolling="no"
+      hidden
+    ></iframe>
+  </div>
 </div>
 
 <div class="about-introduction sponsor-print-card" markdown>

@@ -31,6 +31,7 @@ extra:
   counter_dev_id: ef410665-76d4-43fe-9e91-53f26ed1004b
   counter_dev_utcoffset: 0
   # Cloudflare Web Analytics (omit cloudflare_analytics_token to disable).
+  cloudflare_analytics_token: e48ab46ef70a4feb9514a8b8459d46cd
   social_image: assets/images/social-media-card.png
   social_image_width: 1200
   social_image_height: 630
@@ -155,6 +156,7 @@ extra_css:
   - assets/stylesheets/40-components/hero.css
   - assets/stylesheets/40-components/tables.css
   - assets/stylesheets/50-pages/about.css
+  - assets/stylesheets/50-pages/privacy.css
   - assets/stylesheets/50-pages/sponsor.css
   - assets/stylesheets/90-responsive.css
   - assets/stylesheets/95-print.css
@@ -165,6 +167,8 @@ extra_javascript:
   - assets/javascript/language-preference.js
   - assets/javascript/header-active-nav.js
   - assets/javascript/show-me.js
+  - assets/javascript/sponsor.js
+  - assets/javascript/counter-choice.js
 
 # =============================================================================
 # Copyright (rendered by overrides/partials/copyright.html)

@@ -80,6 +80,7 @@
   }
 
   /* Same stack as the narrow screen: one card across the page. */
+  .md-typeset .grid.cards.legal-notice,
   .md-typeset .grid.cards.sponsor-reasons {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -100,6 +101,29 @@
   .md-typeset .grid.cards > ul,
   .md-typeset .grid.cards > ol {
     display: contents;
+  }
+
+  /* A grid, or a list with display:contents, does not fragment in print.
+     Chrome then leaves a blank first page and starts the notice on page 2.
+     These four pages are one block of text, so print them as ordinary flow. */
+  .md-typeset .grid.cards.legal-notice,
+  .md-typeset .grid.cards.legal-notice > ul {
+    display: block;
+    margin: 0;
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .md-typeset .grid.cards.legal-notice > ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .md-typeset .grid.cards.legal-notice > li,
+  .md-typeset .grid.cards.legal-notice > ul > li {
+    display: block;
+    break-before: auto;
+    page-break-before: auto;
   }
 
   .md-typeset .grid.cards > ul > li,
@@ -212,6 +236,16 @@
     box-shadow: none;
   }
 
+  /* The rule above keeps short cards on one page. A legal notice is longer
+     than a page, so that avoid pushes the whole card onto page 2. */
+  .md-typeset .grid.cards.legal-notice > ul > li,
+  .md-typeset .grid.cards.legal-notice > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards.legal-notice > ul > li,
+  [data-md-color-scheme="slate"] .md-typeset .grid.cards.legal-notice > li {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
   .md-typeset table:not([class]),
   .md-typeset .md-typeset__table table,
   .md-typeset table:not([class]) th,
@@ -316,7 +350,8 @@
   .sponsor-widget,
   .sponsor-widget-frame,
   .sponsor-widget iframe,
-  #kofiframe {
+  #kofiframe,
+  [data-analytics-choice] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -412,6 +447,11 @@
   .md-typeset .grid.cards,
   .md-typeset .grid.cards strong,
   .md-typeset .grid.cards a,
+  .md-typeset .legal-notice h3,
+  .md-typeset .legal-notice .legal-ordinal::after,
+  .md-typeset .legal-notice .privacy-control,
+  .md-typeset .legal-notice .privacy-control::after,
+  .md-typeset .legal-notice a.legal-mail::after,
   .md-typeset .grid.cards .twemoji,
   .md-typeset .grid.cards .twemoji svg,
   .md-typeset .about-introduction,
