@@ -43,11 +43,7 @@ def test_apply_asset_version_rewrites_relative_extra_assets_only() -> None:
 
 def test_apply_asset_version_replaces_an_existing_query() -> None:
     html = '<link rel="stylesheet" href="assets/stylesheets/99-overrides.css?v=old">'
-    out = apply_asset_version(
-        html,
-        ["assets/stylesheets/99-overrides.css"],
-        "abc1234",
-    )
+    out = apply_asset_version(html, ["assets/stylesheets/99-overrides.css"], "abc1234")
     assert out == ('<link rel="stylesheet" href="assets/stylesheets/99-overrides.css?v=abc1234">')
 
 

@@ -142,9 +142,7 @@ class _DocumentTree(HTMLParser):
         if self.literal_tag:
             self.stack[-1]["raw"] += self.get_starttag_text()
             return
-        self.stack[-1]["children"].append(
-            {"tag": tag, "attrs": attrs, "children": [], "void": True}
-        )
+        self.stack[-1]["children"].append({"tag": tag, "attrs": attrs, "children": [], "void": True})
 
     def handle_endtag(self, tag: str) -> None:
         if self.literal_tag:

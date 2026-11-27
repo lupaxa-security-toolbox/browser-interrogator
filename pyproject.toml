@@ -1,7 +1,7 @@
 # Tooling for the website hooks and tests. This repository is not a Python package.
 
 [tool.ruff]
-line-length = 100
+line-length = 200
 target-version = "py313"
 src = ["hooks", "tests"]
 exclude = ["site", ".makefiles", ".venv"]

@@ -34,12 +34,7 @@ def asset_version(*, cwd: Path | None = None, asset_paths: list[Path] | None = N
     if _DEV_SERVER:
         return dev_asset_token(asset_paths or [])
     try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "--short", "HEAD"],
-            cwd=cwd or REPO_ROOT,
-            text=True,
-            stderr=subprocess.DEVNULL,
-        ).strip()
+        return subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=cwd or REPO_ROOT, text=True, stderr=subprocess.DEVNULL).strip()
     except (OSError, subprocess.CalledProcessError):
         return "dev"
 
@@ -62,10 +57,7 @@ def apply_asset_version(html: str, paths: list[str], version: str) -> str:
     unique = sorted({path for path in paths if path}, key=len, reverse=True)
     joined = "|".join(re.escape(path) for path in unique)
     pattern = re.compile(rf'(?P<attr>href|src)="(?P<before>[^"?]*?)(?P<path>{joined})(?:\?[^"]*)?"')
-    return pattern.sub(
-        rf'\g<attr>="\g<before>\g<path>?v={version}"',
-        html,
-    )
+    return pattern.sub(rf'\g<attr>="\g<before>\g<path>?v={version}"', html)
 
 
 def on_post_page(output: str, page: object, config: dict[str, Any]) -> str:

@@ -6,9 +6,7 @@ MKDOCS = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
 NAV_CSS = (ROOT / "mkdocs/assets/stylesheets/30-navigation.css").read_text(encoding="utf-8")
 RESPONSIVE_CSS = (ROOT / "mkdocs/assets/stylesheets/90-responsive.css").read_text(encoding="utf-8")
 FOOTER = (ROOT / "overrides/partials/copyright.html").read_text(encoding="utf-8")
-HIDE_SIDEBAR = (ROOT / "mkdocs/assets/stylesheets/hide-primary-sidebar.css").read_text(
-    encoding="utf-8"
-)
+HIDE_SIDEBAR = (ROOT / "mkdocs/assets/stylesheets/hide-primary-sidebar.css").read_text(encoding="utf-8")
 OVERRIDES_CSS = (ROOT / "mkdocs/assets/stylesheets/99-overrides.css").read_text(encoding="utf-8")
 
 
@@ -50,16 +48,10 @@ def test_header_has_custom_picker_not_alternate() -> None:
 
 
 def test_language_script_follows_page_lifecycle() -> None:
-    scripts = [
-        line.strip()
-        for line in MKDOCS.splitlines()
-        if line.strip().startswith("- assets/javascript/")
-    ]
+    scripts = [line.strip() for line in MKDOCS.splitlines() if line.strip().startswith("- assets/javascript/")]
     assert "- assets/javascript/page-lifecycle.js" in scripts
     assert "- assets/javascript/language-preference.js" in scripts
-    assert scripts.index("- assets/javascript/page-lifecycle.js") < scripts.index(
-        "- assets/javascript/language-preference.js"
-    )
+    assert scripts.index("- assets/javascript/page-lifecycle.js") < scripts.index("- assets/javascript/language-preference.js")
     assert "extra.alternate" not in MKDOCS
     assert "mkdocs-static-i18n" not in MKDOCS
     assert "  language: en" in MKDOCS
@@ -85,12 +77,8 @@ def test_footer_opts_out_of_translate() -> None:
 
 
 def test_header_nav_stays_visible_on_tablet() -> None:
-    tablet = RESPONSIVE_CSS.split("@media screen and (max-width: 76.234375em)")[1].split("@media")[
-        0
-    ]
-    narrow_header = RESPONSIVE_CSS.split("@media screen and (max-width: 54em)")[1].split("@media")[
-        0
-    ]
+    tablet = RESPONSIVE_CSS.split("@media screen and (max-width: 76.234375em)")[1].split("@media")[0]
+    narrow_header = RESPONSIVE_CSS.split("@media screen and (max-width: 54em)")[1].split("@media")[0]
     assert ".lupaxa-header__nav" not in tablet
     assert ".lupaxa-header__nav" in narrow_header
     assert ".lupaxa-header__drawer-button" in narrow_header
